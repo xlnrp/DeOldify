@@ -215,6 +215,8 @@ jupyter lab
 
 From there you can start running the notebooks in Jupyter Lab, via the url they provide you in the console.  
 
+**NOTE** You can also now do "conda activate deoldify" if you have the latest version of conda and in fact that's now recommended. But a lot of people don't have that yet so I'm not going to make it the default instruction here yet.
+
 #### Docker for Jupyter
 
 You can build and run the docker using the following process:
@@ -255,25 +257,26 @@ echo "http://$(curl ifconfig.io):5000" && nvidia-docker run --ipc=host -p 5000:5
 
 Calling the API for image processing
 ```console
-curl -X POST "http://MY_SUPER_API_IP:5000/process_image" -H "accept: image/png" -H "Content-Type: application/json" -d "{\"source_url\":\"http://www.afrikanheritage.com/wp-content/uploads/2015/08/slave-family-P.jpeg\", \"render_factor\":35}" --output colorized_image.png
+curl -X POST "http://MY_SUPER_API_IP:5000/process" -H "accept: image/png" -H "Content-Type: application/json" -d "{\"source_url\":\"http://www.afrikanheritage.com/wp-content/uploads/2015/08/slave-family-P.jpeg\", \"render_factor\":35}" --output colorized_image.png
 ```
 
 Calling the API for video processing
 ```console
-curl -X POST "http://MY_SUPER_API_IP:5000/process_video" -H "accept: application/octet-stream" -H "Content-Type: application/json" -d "{\"source_url\":\"https://v.redd.it/d1ku57kvuf421/HLSPlaylist.m3u8\", \"render_factor\":35}" --output colorized_video.mp4
+curl -X POST "http://MY_SUPER_API_IP:5000/process" -H "accept: application/octet-stream" -H "Content-Type: application/json" -d "{\"source_url\":\"https://v.redd.it/d1ku57kvuf421/HLSPlaylist.m3u8\", \"render_factor\":35}" --output colorized_video.mp4
 ```
 #### Note Regarding Docker
 If you don't have Nvidia Docker, here is the installation guide :
 https://github.com/nvidia/nvidia-docker/wiki/Installation-(version-2.0)#installing-version-20
 
-#### Note GIT LFS (test images download support)
-Make sure you have Git LFS installed if you're planning on using images in the /test_images/ folder.  Otherwise, you'll just wind up getting tiny files that will have the same file names but you will run into errors trying to open them or colorize them.  If you have a fancy shmancy git client like GitHub Desktop, it will probably prompt you to install it and do it for you.  If that doesn't happen,  get it here: https://git-lfs.github.com/
+#### Note on test_images Folder
+The images in this folder have been removed because they were using Git LFS and that costs a lot of money when GitHub actually charges for bandwidth on a popular open source project (they had a billing bug for while that was recently fixed).  The notebooks that use them (the image test ones) still point to images in that directory that I (Jason) have personally and I'd like to keep it that way because, after all, I'm by far the primary and most active developer.  But they won't work for you.  Still, those notebooks are a convenient template for making your own tests if you're so inclined.
 
 --------------------------
 #### Installation Details
 
 This project is built around the wonderful Fast.AI library.  Prereqs, in summary:
-* **Fast.AI 1.0.51** (and its dependencies)
+* **Fast.AI 1.0.51** (and its dependencies).  If you use any higher version you'll see grid artifacts in rendering and tensorboard will malfunction. So yeah...don't do that.
+* **PyTorch 1.0.1** Not the latest version of PyTorch- that will not play nicely with the version of FastAI above.  Note however that the conda install of FastAI 1.0.51 grabs the latest PyTorch, which doesn't work.  This is patched over by our own conda install but fyi.
 * **Jupyter Lab** `conda install -c conda-forge jupyterlab`
 * **Tensorboard** (i.e. install Tensorflow) and **TensorboardX** (https://github.com/lanpa/tensorboardX).  I guess you don't *have* to but man, life is so much better with it.  FastAI now comes with built in support for this- you just  need to install the prereqs: `conda install -c anaconda tensorflow-gpu` and `pip install tensorboardX`
 * **ImageNet** – Only if you're training, of course. It has proven to be a great dataset for my purposes.  http://www.image-net.org/download-images
