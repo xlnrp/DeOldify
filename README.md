@@ -1,10 +1,20 @@
 
 # DeOldify
 
-Image [<img src="https://colab.research.google.com/assets/colab-badge.svg" align="center">](https://colab.research.google.com/github/jantic/DeOldify/blob/master/ImageColorizerColab.ipynb) |
+**Quick Start**: The easiest way to colorize images using DeOldify (for free!) is here: [DeOldify Image Colorization on DeepAI](https://deepai.org/machine-learning-model/colorizer)
+
+The **most advanced** version of DeOldify image colorization is available here, exclusively.  Try a few images for free! [MyHeritiage In Color](https://www.myheritage.com/incolor)
+
+----------------------------
+
+Image (artistic) [<img src="https://colab.research.google.com/assets/colab-badge.svg" align="center">](https://colab.research.google.com/github/jantic/DeOldify/blob/master/ImageColorizerColab.ipynb) |
 Video [<img src="https://colab.research.google.com/assets/colab-badge.svg" align="center">](https://colab.research.google.com/github/jantic/DeOldify/blob/master/VideoColorizerColab.ipynb)
 
-**NEW** Instructions on how to use the Colabs above have been kindly provided in video tutorial form by Old Ireland in Colour's John Breslin.  It's great! Click video image below to watch.
+**NEW** Having trouble with the default image colorizer, aka "artistic"?  Try the "stable" one below.  It generally won't produce colors that are as interesting as "artistic", but the glitches are noticeably reduced.  
+
+Image (stable) [<img src="https://colab.research.google.com/assets/colab-badge.svg" align="center">](https://colab.research.google.com/github/jantic/DeOldify/blob/master/ImageColorizerColabStable.ipynb)
+
+Instructions on how to use the Colabs above have been kindly provided in video tutorial form by Old Ireland in Colour's John Breslin.  It's great! Click video image below to watch.
 
 [![](http://img.youtube.com/vi/VaEl0faDw38/0.jpg)](http://www.youtube.com/watch?v=VaEl0faDw38)
 
@@ -248,6 +258,10 @@ From there you can start running the notebooks in Jupyter Lab, via the url they 
 #### Note on test_images Folder
 
 The images in the `test_images` folder have been removed because they were using Git LFS and that costs a lot of money when GitHub actually charges for bandwidth on a popular open source project (they had a billing bug for while that was recently fixed).  The notebooks that use them (the image test ones) still point to images in that directory that I (Jason) have personally and I'd like to keep it that way because, after all, I'm by far the primary and most active developer.  But they won't work for you.  Still, those notebooks are a convenient template for making your own tests if you're so inclined.
+
+#### Typical training
+
+The notebook `ColorizeTrainingWandb` has been created to log and monitor results through [Weights & Biases](https://www.wandb.com/). You can find a description of typical training by consulting [W&B Report](https://app.wandb.ai/borisd13/DeOldify/reports?view=borisd13%2FDeOldify).
 
 ## Docker
 
